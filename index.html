@@ -6,17 +6,32 @@
 		<meta name="description" content="App for learning">
 		<title>Chill and Study</title>
 		<link rel="stylesheet" href="styles.css">
+		
 	</head>
     <body>
         <main>
-			<div class="menu-screen">
+			<section class="menu-screen">
 				<div class="intro">
 					<p>What are we doing today?</p>
 				</div>
                 <div class="option-buttons">
-                    <button id="start" class="game-button"></button>
-                </div>
-			</div>
+                    <button id="music">Music</button>
+                    <button id="timer">Timer</button>
+				</div>
+			</section>
+			<section class="timer-screen">
+				<div id="clock">
+					<p>00:00:00</p>
+					<for>
+						<input id="clock-input" type="text" maxlength="8" required>
+					</for>
+				</div>
+				<div class="clock-buttons">
+					<button>Start</button>
+					<button>Stop</button>
+					<button>Reset</button>
+				</div>
+			</section>
         </main>
     </body>
 	<script src="script.js"></script>

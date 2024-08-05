@@ -1,0 +1,108 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /*border: 1px solid black;*/
+}
+:root {
+    --background-first-color: #3498db;
+}
+html {
+    overflow-y: hidden;
+}
+/*Menu*/
+.menu-screen {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background-image: url("./images/galaxy.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.closed {
+    display: none;
+}
+.intro {
+    width: 30%;
+    min-width: 50px;
+    height: 200px;
+    border-radius: 40px;
+    border: 5px solid black;
+    background-color: var(--background-first-color);    
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+    cursor: pointer;
+    user-select: none;
+}
+.intro p {
+    width: fit-content;
+    height: fit-content;
+    font-size: 2rem;
+}
+.option-buttons button {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    z-index: 1;
+    position: absolute;
+    top: 40%;
+    left: 45%;
+    transform: translate(0px);
+    opacity: 0;
+}
+.option-buttons button {
+    cursor: pointer;
+}
+#music {
+    transition: transform 1s, opacity 0.75s ease-in;
+}
+#timer{
+    transition: transform 3.5s, opacity 1.75s ease-in;
+}
+.option-buttons button.menu-clicked {
+   opacity: 1;
+ }
+.option-buttons #music.menu-clicked {
+   transform: translate(100px, -250px);
+}
+.option-buttons #timer.menu-clicked {
+    transform: translate(300px, -150px);
+}
+/*Timer*/
+.timer-screen {
+    display: none;
+    width: 100%;
+    height: 100vh;
+}
+.timer-screen-opened {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#clock {
+    width: 400px;
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: 10px solid black;
+    box-shadow: 8px -7px 13px 2px hsla(0, 0%, 0%, 0.67);
+    border-radius: 40px;
+}
+#clock button {
+    width: 50px;
+    height: 10px;
+}
+#clock p {
+    font-size: 1.75rem;
+}
+
