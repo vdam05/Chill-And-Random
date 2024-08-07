@@ -4,16 +4,28 @@ const introButton = document.querySelector(".intro");
 const buttons = document.querySelectorAll(".option-buttons button");
 const timerOption = document.getElementById("timer");
 const timerScreen = document.querySelector(".timer-screen");
+const cutscene = document.getElementById("cutscene");
 const openMainMenu = () => {
     buttons.forEach((button) => button.classList.toggle("menu-clicked"));
 }
+/*For cutscenes*/
+const cutsceneFunction = (callback) => {
+    cutscene.classList.toggle("cutscene-animated");
+    setTimeout(callback, 1500);
+    setTimeout(() => {
+        cutscene.classList.toggle("cutscene-animated");
+    }, 3000);
+}
+/**/ 
 introButton.addEventListener("click", openMainMenu);
 timerOption.addEventListener("click", () => {
+   cutsceneFunction(() => {
     menuScreen.classList.toggle("closed");
-    timerScreen.classList.toggle("timer-screen-opened");
+    timerScreen.classList.toggle("opened");
+   })
 })
 /*Music (by using an API)*/
-  
+
 /*Timer*/
 //Variables and classes here
 const clockInput = document.getElementById("clock-input");
@@ -87,7 +99,6 @@ const createTimer = (timer) => {
         return;
     } 
     mainTimer.textContent = timer;
-    //Gets the numbers and initialize the clock's hours, minutes and seconds
     currentTime.splitAndInitialize(timer);
     resettedTime.splitAndInitialize(timer);
 }
@@ -99,7 +110,10 @@ const updateTime = () => {
         currentTime.setTime(start);
         mainTimer.textContent = currentTime.toString();
     } else {
-        clearInterval(intervalId);
+        /*TBA (plays music whenever done)
+        const timeUp = new Audio();
+        */
+        clearInterval(clockIntervalId);
     }
 }
 const startTime = () => {
@@ -130,8 +144,10 @@ const resetTime = () => {
     mainTimer.textContent = currentTime;
 }
 const goBack = () => {
-    menuScreen.classList.toggle("closed");
-    timerScreen.classList.toggle("timer-screen-opened");
+    cutsceneFunction(() => {
+        menuScreen.classList.toggle("closed");
+        timerScreen.classList.toggle("opened");
+    })
 }
 clockInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
