@@ -47,23 +47,19 @@ html {
     align-items: center;
     position: relative;
 }
-.menu-screen, .timer-screen {
-    background-image: url("./images/galaxy.png");
+.menu-screen, .timer-screen, .picture-screen, .words-screen {
+    background-image: url("./src/images/galaxy.png");
     background-repeat: no-repeat;
     background-size: cover;
 }
-.closed {
-    display: none;
-}
 .intro {
-    width: 40%;
-    min-width: 50px;
-    height: 200px;
+    width: clamp(200px, 50%, 400px);
+    height: clamp(150px, 50%, 200px);
     border-radius: 40px;
     border: 5px solid black;
     background-color: var(--background-first-color);    
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 50;
@@ -71,9 +67,9 @@ html {
     user-select: none;
 }
 .intro p {
-    width: fit-content;
-    height: fit-content;
-    font-size: 2rem;
+    width: 75%;
+    text-align: center;
+    font-size: 1.5rem;
 }
 .option-buttons button {
     width: 75px;
@@ -97,14 +93,26 @@ html {
     transition: transform 2s, opacity 1.5s ease-in;
     background: linear-gradient(to right, #83a4d4, #b6fbff);
 }
+#pictures {
+    transition: transform 3s, opacity 2.25s ease-in;
+}
+#words {
+    transition: transform 4s, opacity 3s ease-in;
+}
 .option-buttons button.menu-clicked {
    opacity: 1;
  }
-.option-buttons #music.menu-clicked {
+#music.menu-clicked {
    transform: translate(100px, -200px);
 }
-.option-buttons #timer.menu-clicked {
+#timer.menu-clicked {
     transform: translate(250px, -125px);
+}
+#pictures.menu-clicked {
+    transform: translate(375px, -30px);
+}
+#words.menu-clicked {
+    transform: translate(350px, 150px);
 }
 /*Timer*/
 .timer-screen {
@@ -113,12 +121,6 @@ html {
     height: 100vh;
     row-gap: 20px;
 }
-.opened {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
 #clock {
     width: 500px;
     height: 200px;
@@ -126,7 +128,7 @@ html {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    row-gap: 25px;
+    row-gap: 10px;
     border: 10px solid black;
     box-shadow: 8px -7px 13px 2px hsla(0, 0%, 0%, 0.67);
     border-radius: 40px;
@@ -135,8 +137,20 @@ html {
 #clock-input {
     width: 100px;
 }
-#clock p {
+#clock p:first-child {
     font-size: 3.5rem;
+}
+#stop-music {
+    display: none;
+    height: 50px;
+    width: 50px;
+    background-color: red;
+    border-radius: 50%;
+    border: 3px solid black;
+    position: absolute;
+    right: 30px;
+    top: 45%;
+    color: black;
 }
 .clock-buttons {
     width: 500px;
@@ -154,4 +168,48 @@ html {
     background-color: yellow;
     color: red;
 }
-
+/*Pictures*/
+.picture-screen {
+    display: none;
+}
+/*Synonyms*/
+.words-screen {
+    display: none;
+    height: 100vh;
+    width: 100%;
+}
+.word-input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: clamp(400px, 50%, 800px);
+    height: clamp(20px, 30%, 400px);
+    row-gap: max(30px, 5%);
+}
+#insert-word-label {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: black;
+}
+#insert-word {
+    width: 200px;
+    text-align: center;
+}
+#insert-word-button {
+    width: 150px;
+    height: 75px;
+    font-size: 1rem;
+    color: red;
+    background-color: yellow;
+}
+/*At the end*/
+.opened {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.closed {
+    display: none;
+}

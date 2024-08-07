@@ -16,12 +16,13 @@
 			<div id="cutscene"></div>
 			<section class="menu-screen">
 				<div class="intro">
-					<p>What are we doing today?</p>
+					<p>What Are We Doing Today?</p>
 				</div>
                 <div class="option-buttons">
                     <button id="music">Music</button>
                     <button id="timer">Timer</button>
 					<button id="pictures">Pictures</button>
+					<button id="words">Words</button>
 				</div>
 			</section>
 			<section class="music-screen">
@@ -30,15 +31,26 @@
 			<section class="timer-screen">
 				<div id="clock">
 					<p>00:00:00</p>
-					<label for="pass" name="clock-value">
-						<input id="clock-input" type="text" maxlength="8" required>
-					</label>
+					<label for="clock-input" name="clock-value">Type in a time of form 00:00:00 and press Enter</label>
+					<input id="clock-input" type="text" maxlength="8" required>
 				</div>
 				<div class="clock-buttons">
 					<button id="start-clock" onclick="startTime()">Start</button>
 					<button id="stop-clock" onclick="stopTime()">Stop</button>
 					<button id="reset-clock" onclick="resetTime()">Reset</button>
 					<button id="go-back" onclick="goBack()">Back</button>
+				</div>
+			</section>
+			<section class="picture-screen">
+			</section>
+			<section class="words-screen">
+				<div class="word-input">
+					<label id="insert-word-label" for="insert-word">Enter a word</label>
+					<input id="insert-word" type="text" minlength="2" />
+					<button id="insert-word-button">Find</button>
+				</div>
+				<div class="word-output">
+
 				</div>
 			</section>
         </main>

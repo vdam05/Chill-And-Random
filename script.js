@@ -4,6 +4,8 @@ const introButton = document.querySelector(".intro");
 const buttons = document.querySelectorAll(".option-buttons button");
 const timerOption = document.getElementById("timer");
 const timerScreen = document.querySelector(".timer-screen");
+const wordOption = document.getElementById("words");
+const wordScreen  = document.querySelector(".words-screen");
 const cutscene = document.getElementById("cutscene");
 const openMainMenu = () => {
     buttons.forEach((button) => button.classList.toggle("menu-clicked"));
@@ -23,13 +25,21 @@ timerOption.addEventListener("click", () => {
     menuScreen.classList.toggle("closed");
     timerScreen.classList.toggle("opened");
    })
+});
+wordOption.addEventListener("click", () => {
+    cutsceneFunction(() => {
+        menuScreen.classList.toggle("closed");
+        wordScreen.classList.toggle("opened");
+    });
 })
+
 /*Music (by using an API)*/
 
 /*Timer*/
 //Variables and classes here
 const clockInput = document.getElementById("clock-input");
 const mainTimer = document.querySelector("#clock p");
+const stopMusic = document.getElementById("stop-music");
 const startButton = document.getElementById("start-clock");
 const stopButton = document.getElementById("stop-clock");
 const resetButton = document.getElementById("reset-clock");
@@ -39,6 +49,9 @@ class TimeObject {
         this.hours = hours;
         this.minutes = minutes;
         this.seconds = seconds;
+    }
+    checkZero() {
+        return this.hours === 0 && this.minutes === 0 && this.seconds === 0;
     }
     setTime(miliseconds) {
         if (miliseconds < 0) {
@@ -81,6 +94,7 @@ let clockIntervalId = 0;
 const clockPattern = /^([0-1]\d|2[0-4]):([0-5]\d):([0-5]\d)$/; //Regex for numbers only work single digit so have to do it this way
 //Main functions 
 const checkInput = value => clockPattern.test(value);
+const checkZero = string => string === "00:00:00";
 const disableButton = (...buttons) => {
     buttons.forEach((button) => {
         button.style.opacity = "0.5";
@@ -110,13 +124,15 @@ const updateTime = () => {
         currentTime.setTime(start);
         mainTimer.textContent = currentTime.toString();
     } else {
-        /*TBA (plays music whenever done)
-        const timeUp = new Audio();
-        */
         clearInterval(clockIntervalId);
+        enableButton(startButton);
     }
 }
 const startTime = () => {
+    if (currentTime.checkZero()) {
+        window.alert("No clock entered yet");
+        return;
+    }
     if (!isRunning) {
         isRunning = true;
         disableButton(startButton);
@@ -127,6 +143,10 @@ const startTime = () => {
     }
 }
 const stopTime = () => {
+    if (currentTime.checkZero()) {
+        window.alert("No clock entered yet");
+        return;
+    }
     if (isRunning) {
         isRunning = false;
         disableButton(stopButton);
@@ -155,4 +175,15 @@ clockInput.addEventListener("keydown", (e) => {
         clockInput.value = "";
         createTimer(getClockInput);
     }
+});
+/*Synonyms with an API*/
+const inputWord = document.getElementById("insert-word");
+const inputButton = document.getElementById("insert-word-button");
+const fetchWord = (word) => {
+    fetch(`https://api.api-ninjas.com/v1/thesaurus?word=${word}`)
+    .then((res) => res.json())
+    .catch((error) => console.log(error));
+}
+inputButton.addEventListener("click", () => {
+    fetchWord(inputWord.value);
 });
