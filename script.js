@@ -18,6 +18,13 @@ const cutsceneFunction = (callback) => {
         cutscene.classList.toggle("cutscene-animated");
     }, 3000);
 }
+const goBack = (screen) => {
+    cutsceneFunction(() => {
+        openMainMenu();
+        menuScreen.classList.toggle("closed");
+        screen.classList.toggle("opened");
+    })
+}
 /**/ 
 introButton.addEventListener("click", openMainMenu);
 timerOption.addEventListener("click", () => {
@@ -30,6 +37,7 @@ wordOption.addEventListener("click", () => {
     cutsceneFunction(() => {
         menuScreen.classList.toggle("closed");
         wordScreen.classList.toggle("opened");
+        wordScreen.style.justifyContent = "start";
     });
 })
 
@@ -163,12 +171,6 @@ const resetTime = () => {
     currentTime.copyTime(resettedTime);
     mainTimer.textContent = currentTime;
 }
-const goBack = () => {
-    cutsceneFunction(() => {
-        menuScreen.classList.toggle("closed");
-        timerScreen.classList.toggle("opened");
-    })
-}
 clockInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
         const getClockInput = clockInput.value; 
@@ -179,11 +181,27 @@ clockInput.addEventListener("keydown", (e) => {
 /*Synonyms with an API*/
 const inputWord = document.getElementById("insert-word");
 const inputButton = document.getElementById("insert-word-button");
-const fetchWord = (word) => {
-    fetch(`https://api.api-ninjas.com/v1/thesaurus?word=${word}`)
-    .then((res) => res.json())
-    .catch((error) => console.log(error));
+const output = document.getElementById("word-output");
+const errorDialog = document.getElementById("error-dialog");
+const wordCheck = (word) => {
+    const wordPattern = /^[a-z]+$/gi;
+    return wordPattern.test(word);
+}
+//TBA async function
+async function fetchWord (word) {
+    const fetchedWord = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
+                      .then((res) => res.json()).catch((error) => console.error(error));
+    console.log(fetchedWord);
 }
 inputButton.addEventListener("click", () => {
-    fetchWord(inputWord.value);
+    const wordInputted = inputWord.value;
+    inputWord.value = "";
+    if (wordCheck(wordInputted)) {
+        fetchWord(wordInputted);
+    } else {
+        errorDialog.showModal();
+        setTimeout(() => {
+            errorDialog.close();
+        }, 4000);
+    }
 });

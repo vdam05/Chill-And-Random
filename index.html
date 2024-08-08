@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 		<meta name="description" content="App for learning">
-		<title>Chill and Do Random</title>
+		<title>Chill and Random</title>
 		<link rel="stylesheet" href="styles.css">
 		<!--Font-->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,20 +38,23 @@
 					<button id="start-clock" onclick="startTime()">Start</button>
 					<button id="stop-clock" onclick="stopTime()">Stop</button>
 					<button id="reset-clock" onclick="resetTime()">Reset</button>
-					<button id="go-back" onclick="goBack()">Back</button>
+					<button id="go-back" onclick="goBack(timerScreen)">Back</button>
 				</div>
 			</section>
 			<section class="picture-screen">
 			</section>
 			<section class="words-screen">
+				<dialog id="error-dialog">
+					<p>Cannot have numbers or spaces. Got it?</p>
+				</dialog>
 				<div class="word-input">
-					<label id="insert-word-label" for="insert-word">Enter a word</label>
+					<label id="insert-word-label" for="insert-word">Enter a word:</label>
 					<input id="insert-word" type="text" minlength="2" />
 					<button id="insert-word-button">Find</button>
 				</div>
-				<div class="word-output">
-
-				</div>
+				<p>Result:</p>
+				<div id="word-output"></div>
+				<button id="go-back-words" onclick="goBack(wordScreen)">Back</button>
 			</section>
         </main>
     </body>

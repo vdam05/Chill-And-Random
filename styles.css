@@ -47,6 +47,16 @@ html {
     align-items: center;
     position: relative;
 }
+@keyframes enter-menu {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 .menu-screen, .timer-screen, .picture-screen, .words-screen {
     background-image: url("./src/images/galaxy.png");
     background-repeat: no-repeat;
@@ -65,6 +75,7 @@ html {
     z-index: 50;
     cursor: pointer;
     user-select: none;
+    animation: enter-menu 2.5s ease 50ms 1;
 }
 .intro p {
     width: 75%;
@@ -173,10 +184,31 @@ html {
     display: none;
 }
 /*Synonyms*/
+
 .words-screen {
     display: none;
     height: 100vh;
     width: 100%;
+    row-gap: 20px;
+}
+#error-dialog {
+    width: 250px;
+    height: 100px;
+    background-color: white;
+    text-align: center;
+    margin: auto auto;
+}
+#error-dialog p {
+    font-size: 1rem;
+    color: black;
+    font-weight: 300;
+}
+#error-dialog button {
+    height: 25px;
+    width: 75px;
+    border-radius: 40px;
+    background-color: white;
+    color: black;
 }
 .word-input {
     display: flex;
@@ -185,12 +217,12 @@ html {
     align-items: center;
     width: clamp(400px, 50%, 800px);
     height: clamp(20px, 30%, 400px);
-    row-gap: max(30px, 5%);
+    row-gap: 20px;
 }
 #insert-word-label {
     font-size: 1.5rem;
     font-weight: 500;
-    color: black;
+    color: white;
 }
 #insert-word {
     width: 200px;
@@ -198,10 +230,38 @@ html {
 }
 #insert-word-button {
     width: 150px;
-    height: 75px;
+    height: 50px;
     font-size: 1rem;
     color: red;
     background-color: yellow;
+    box-shadow: 8px 8px 7px 0px hsla(0, 0%, 0%, 0.75);
+    transition: all 0.5s ease;
+}
+#insert-word-button:active {
+    transform: translateX(4px) translateY(4px);
+    box-shadow: 4px 4px 7px 0px hsla(0, 0%, 0%, 0.75);
+}
+.word-input + p {
+    font-size: 1.5rem;
+    color: white;
+}
+#word-output {
+    width: clamp(400px, 60%, 1000px);
+    height: clamp(200px, 50%, 600px);
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid yellow;
+    border-radius: 40px;
+}
+#go-back-words {
+    width: 100px;
+    height: 40px;
+    background-color: blue;
+    color: white;
+
 }
 /*At the end*/
 .opened {
