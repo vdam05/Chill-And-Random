@@ -4,26 +4,28 @@ const introButton = document.querySelector(".intro");
 const buttons = document.querySelectorAll(".option-buttons button");
 const timerOption = document.getElementById("timer");
 const timerScreen = document.querySelector(".timer-screen");
-const wordOption = document.getElementById("words");
-const wordScreen  = document.querySelector(".words-screen");
+const foodOption = document.getElementById("foods");
+const foodScreen  = document.querySelector(".foods-screen");
 const cutscene = document.getElementById("cutscene");
 const openMainMenu = () => {
     buttons.forEach((button) => button.classList.toggle("menu-clicked"));
 }
 /*For cutscenes*/
-const cutsceneFunction = (callback) => {
+const cutsceneFunction = (callback, button) => {
+    button.disabled = true;
     cutscene.classList.toggle("cutscene-animated");
     setTimeout(callback, 1500);
     setTimeout(() => {
         cutscene.classList.toggle("cutscene-animated");
+        button.disabled = false;
     }, 3000);
 }
-const goBack = (screen) => {
+const goBack = (screen, button) => {
     cutsceneFunction(() => {
         openMainMenu();
         menuScreen.classList.toggle("closed");
         screen.classList.toggle("opened");
-    })
+    }, button);
 }
 /**/ 
 introButton.addEventListener("click", openMainMenu);
@@ -31,14 +33,14 @@ timerOption.addEventListener("click", () => {
    cutsceneFunction(() => {
     menuScreen.classList.toggle("closed");
     timerScreen.classList.toggle("opened");
-   })
+   }, timerOption);
 });
-wordOption.addEventListener("click", () => {
+foodOption.addEventListener("click", () => {
     cutsceneFunction(() => {
         menuScreen.classList.toggle("closed");
-        wordScreen.classList.toggle("opened");
-        wordScreen.style.justifyContent = "start";
-    });
+        foodScreen.classList.toggle("opened");
+        foodScreen.style.justifyContent = "start";
+    }, foodOption);
 })
 
 /*Music (by using an API)*/
@@ -51,6 +53,7 @@ const stopMusic = document.getElementById("stop-music");
 const startButton = document.getElementById("start-clock");
 const stopButton = document.getElementById("stop-clock");
 const resetButton = document.getElementById("reset-clock");
+const goBackTimer = document.getElementById("go-back");
 let isRunning = false;
 class TimeObject {
     constructor(hours = 0, minutes = 0, seconds = 0) {
@@ -179,29 +182,40 @@ clockInput.addEventListener("keydown", (e) => {
     }
 });
 /*Synonyms with an API*/
-const inputWord = document.getElementById("insert-word");
-const inputButton = document.getElementById("insert-word-button");
-const output = document.getElementById("word-output");
+const inputFood = document.getElementById("insert-food");
+const inputButton = document.getElementById("insert-food-button");
+const output = document.querySelector("#food-output");
 const errorDialog = document.getElementById("error-dialog");
+const goBackFood = document.getElementById("go-back-foods");
+const foodPic = document.getElementById("food-output-picture");
+const foodLegend = document.getElementById("food-output-legend");
 const wordCheck = (word) => {
-    const wordPattern = /^[a-z]+$/gi;
+    const wordPattern = /^[a-z\s]+$/gi;
     return wordPattern.test(word);
 }
 //TBA async function
-async function fetchWord (word) {
-    const fetchedWord = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`)
-                      .then((res) => res.json()).catch((error) => console.error(error));
-    console.log(fetchedWord);
+async function fetchFood (word) {
+    const fetchedFood = await fetch(`http://www.themealdb.com/api/json/v1/1/search.php?s=${word}`)
+                        .then((res) => res.json()).catch((error) => console.log(error));
+    if (fetchedFood.meals === null) {
+        foodLegend.textContent = "No food found";
+        return;
+    }
+    foodPic.src = fetchedFood.meals[0].strMealThumb;
+    foodPic.alt = fetchedFood.meals[0].strMeal;
+    foodLegend.textContent = foodPic.alt;
 }
 inputButton.addEventListener("click", () => {
-    const wordInputted = inputWord.value;
-    inputWord.value = "";
-    if (wordCheck(wordInputted)) {
-        fetchWord(wordInputted);
+    const foodInputted = inputFood.value;
+    if (wordCheck(foodInputted)) {
+       fetchFood(foodInputted);
     } else {
         errorDialog.showModal();
+        errorDialog.style.display = "flex";
         setTimeout(() => {
             errorDialog.close();
+            errorDialog.style.display = "none";
         }, 4000);
     }
+    inputFood.value = "";
 });

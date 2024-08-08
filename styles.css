@@ -57,7 +57,7 @@ html {
         transform: translateY(0);
     }
 }
-.menu-screen, .timer-screen, .picture-screen, .words-screen {
+.menu-screen, .timer-screen, .picture-screen, .foods-screen {
     background-image: url("./src/images/galaxy.png");
     background-repeat: no-repeat;
     background-size: cover;
@@ -107,7 +107,7 @@ html {
 #pictures {
     transition: transform 3s, opacity 2.25s ease-in;
 }
-#words {
+#foods {
     transition: transform 4s, opacity 3s ease-in;
 }
 .option-buttons button.menu-clicked {
@@ -122,7 +122,7 @@ html {
 #pictures.menu-clicked {
     transform: translate(375px, -30px);
 }
-#words.menu-clicked {
+#foods.menu-clicked {
     transform: translate(350px, 150px);
 }
 /*Timer*/
@@ -183,9 +183,8 @@ html {
 .picture-screen {
     display: none;
 }
-/*Synonyms*/
-
-.words-screen {
+/*food*/
+.foods-screen {
     display: none;
     height: 100vh;
     width: 100%;
@@ -197,20 +196,16 @@ html {
     background-color: white;
     text-align: center;
     margin: auto auto;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 #error-dialog p {
     font-size: 1rem;
     color: black;
     font-weight: 300;
 }
-#error-dialog button {
-    height: 25px;
-    width: 75px;
-    border-radius: 40px;
-    background-color: white;
-    color: black;
-}
-.word-input {
+.food-input {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -219,16 +214,23 @@ html {
     height: clamp(20px, 30%, 400px);
     row-gap: 20px;
 }
-#insert-word-label {
+#insert-food-label {
     font-size: 1.5rem;
     font-weight: 500;
     color: white;
 }
-#insert-word {
+#insert-food {
     width: 200px;
     text-align: center;
 }
-#insert-word-button {
+.food-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 40px;
+}
+.food-button {
     width: 150px;
     height: 50px;
     font-size: 1rem;
@@ -237,15 +239,15 @@ html {
     box-shadow: 8px 8px 7px 0px hsla(0, 0%, 0%, 0.75);
     transition: all 0.5s ease;
 }
-#insert-word-button:active {
+.food-button:active {
     transform: translateX(4px) translateY(4px);
     box-shadow: 4px 4px 7px 0px hsla(0, 0%, 0%, 0.75);
 }
-.word-input + p {
+.food-input + p {
     font-size: 1.5rem;
     color: white;
 }
-#word-output {
+#food-output {
     width: clamp(400px, 60%, 1000px);
     height: clamp(200px, 50%, 600px);
     background-color: white;
@@ -256,7 +258,17 @@ html {
     border: 1px solid yellow;
     border-radius: 40px;
 }
-#go-back-words {
+#food-output-picture {
+    height: 300px;
+    width: 300px;
+    border-color: transparent;
+}
+#food-output-legend {
+    height: 50px;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+#go-back-foods {
     width: 100px;
     height: 40px;
     background-color: blue;

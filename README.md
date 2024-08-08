@@ -5,6 +5,5 @@ Has not yet considered building in React.
 
 # List includes (so far):
 Pomodoro Timer: Can start, stop and reset to most recent timer set.
-Dictionary: Using an API, can give synonyms and acronyms of words for writing.
+Food pictures: Using an API, load a random picture of food. For fun.
 Music (TBA)
-Pictures (TBA): Can load cute animal pictures on random for that moral boost.

@@ -22,7 +22,7 @@
                     <button id="music">Music</button>
                     <button id="timer">Timer</button>
 					<button id="pictures">Pictures</button>
-					<button id="words">Words</button>
+					<button id="foods">Foods</button>
 				</div>
 			</section>
 			<section class="music-screen">
@@ -38,23 +38,29 @@
 					<button id="start-clock" onclick="startTime()">Start</button>
 					<button id="stop-clock" onclick="stopTime()">Stop</button>
 					<button id="reset-clock" onclick="resetTime()">Reset</button>
-					<button id="go-back" onclick="goBack(timerScreen)">Back</button>
+					<button id="go-back" onclick="goBack(timerScreen, goBackTimer)">Back</button>
 				</div>
 			</section>
-			<section class="picture-screen">
+			<section class="food-screen">
 			</section>
-			<section class="words-screen">
+			<section class="foods-screen">
 				<dialog id="error-dialog">
 					<p>Cannot have numbers or spaces. Got it?</p>
 				</dialog>
-				<div class="word-input">
-					<label id="insert-word-label" for="insert-word">Enter a word:</label>
-					<input id="insert-word" type="text" minlength="2" />
-					<button id="insert-word-button">Find</button>
+				<div class="food-input">
+					<label id="insert-food-label" for="insert-food">Enter a word:</label>
+					<input id="insert-food" type="text" minlength="2" />
+					<div class="food-buttons">
+						<button class="food-button" id="insert-food-button">Find</button>
+						<button class="food-button" id="random-food-button">Random Yums</button>
+					</div>
 				</div>
 				<p>Result:</p>
-				<div id="word-output"></div>
-				<button id="go-back-words" onclick="goBack(wordScreen)">Back</button>
+				<div id="food-output">
+					<img id="food-output-picture">
+					<legend id="food-output-legend"></legend>
+				</div>
+				<button id="go-back-foods" onclick="goBack(foodScreen, goBackFood)">Back</button>
 			</section>
         </main>
     </body>
