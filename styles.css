@@ -249,24 +249,25 @@ html {
 }
 #food-output {
     width: clamp(400px, 60%, 1000px);
-    height: clamp(200px, 50%, 600px);
     background-color: white;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
     border: 1px solid yellow;
     border-radius: 40px;
 }
 #food-output-picture {
-    height: 300px;
-    width: 300px;
-    border-color: transparent;
+    height: 275px;
+    width: 275px;
+    border-radius: 40px;
+    border: 1px dashed black;
 }
 #food-output-legend {
-    height: 50px;
+    width: clamp(75px, 40%, 400px);
     font-size: 1.5rem;
     font-weight: 500;
+    margin-left: 20px;
 }
 #go-back-foods {
     width: 100px;

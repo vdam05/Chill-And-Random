@@ -184,26 +184,39 @@ clockInput.addEventListener("keydown", (e) => {
 /*Synonyms with an API*/
 const inputFood = document.getElementById("insert-food");
 const inputButton = document.getElementById("insert-food-button");
+const randomButton = document.getElementById("random-food-button");
 const output = document.querySelector("#food-output");
 const errorDialog = document.getElementById("error-dialog");
 const goBackFood = document.getElementById("go-back-foods");
 const foodPic = document.getElementById("food-output-picture");
 const foodLegend = document.getElementById("food-output-legend");
 const wordCheck = (word) => {
-    const wordPattern = /^[a-z\s]+$/gi;
+    const wordPattern = /^[a-z\s-]+$/gi;
     return wordPattern.test(word);
+}
+const getFoodDetails = (food) => {
+    foodPic.src = food.meals[0].strMealThumb;
+    foodPic.alt = food.meals[0].strMeal;
+    foodLegend.textContent = foodPic.alt;
 }
 //TBA async function
 async function fetchFood (word) {
-    const fetchedFood = await fetch(`http://www.themealdb.com/api/json/v1/1/search.php?s=${word}`)
-                        .then((res) => res.json()).catch((error) => console.log(error));
+    const fetchedFood = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${word}`, {
+                            "headers": {
+
+                            }
+                        })
+                        .then((res) => res.json()).catch((error) => console.error(error));
     if (fetchedFood.meals === null) {
         foodLegend.textContent = "No food found";
         return;
     }
-    foodPic.src = fetchedFood.meals[0].strMealThumb;
-    foodPic.alt = fetchedFood.meals[0].strMeal;
-    foodLegend.textContent = foodPic.alt;
+    getFoodDetails(fetchedFood);
+}
+async function fetchRandomFood () {
+    const randomFood = await fetch("https://www.themealdb.com/api/json/v1/1/random.php")
+                             .then((res) => res.json()).catch((error) => console.error(error));
+    getFoodDetails(randomFood);
 }
 inputButton.addEventListener("click", () => {
     const foodInputted = inputFood.value;
@@ -219,3 +232,8 @@ inputButton.addEventListener("click", () => {
     }
     inputFood.value = "";
 });
+randomButton.addEventListener("click", () => {
+    fetchRandomFood();
+    disableButton(randomButton);
+    setTimeout(() => enableButton(randomButton), 3000);
+})
