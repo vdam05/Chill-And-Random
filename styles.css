@@ -98,7 +98,6 @@ html {
 }
 #music {
     transition: transform 1s, opacity 0.75s ease-in;
-    background: linear-gradient(to right, #d38312, #a83279);
 }
 #timer{
     transition: transform 2s, opacity 1.5s ease-in;
@@ -109,6 +108,7 @@ html {
 }
 #foods {
     transition: transform 4s, opacity 3s ease-in;
+    background: linear-gradient(to right, #d38312, #a83279);
 }
 .option-buttons button.menu-clicked {
    opacity: 1;

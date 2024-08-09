@@ -105,14 +105,14 @@ const clockPattern = /^([0-1]\d|2[0-4]):([0-5]\d):([0-5]\d)$/; //Regex for numbe
 /*Note: Clock could only be started if the alarm is turned off
 */ 
 const checkInput = value => clockPattern.test(value);
-//Disable buttons with opacity and disabled, work on arrays
+//Disable buttons with opacity and disabled, work on multiple parameters (universal function)
 const disableButton = (...buttons) => {
     buttons.forEach((button) => {
         button.style.opacity = "0.5";
         button.disabled = true;
     })
 }
-//Emable buttons
+//Emable buttons (universal function)
 const enableButton = (...buttons) => {
     buttons.forEach((button) => {
         button.style.opacity = "1";
