@@ -42,14 +42,7 @@ foodOption.addEventListener("click", () => {
         foodScreen.style.justifyContent = "start";
     }, foodOption);
 })
-
-/*Music (by using an API)*/
-
 /*Timer*/
-/*Bugs (TBF)
-    - Alarm can enable button.
-    - Shorten codes
-*/ 
 //Variables and classes here
 const clockInput = document.getElementById("clock-input");
 const mainTimer = document.querySelector("#clock p");
@@ -109,22 +102,30 @@ let clockIntervalId = 0;
 const getAlarm = new Audio("./src/audio/racing-into-the-night-alarm.mp3");
 const clockPattern = /^([0-1]\d|2[0-4]):([0-5]\d):([0-5]\d)$/; //Regex for numbers only work single digit so have to do it this way
 //Main functions 
+/*Note: Clock could only be started if the alarm is turned off
+*/ 
 const checkInput = value => clockPattern.test(value);
+//Disable buttons with opacity and disabled, work on arrays
 const disableButton = (...buttons) => {
     buttons.forEach((button) => {
         button.style.opacity = "0.5";
         button.disabled = true;
     })
 }
+//Emable buttons
 const enableButton = (...buttons) => {
     buttons.forEach((button) => {
         button.style.opacity = "1";
         button.disabled = false;
     })
 }
+//Checks if the audio is already running, to pause and reset timer and enable startButton.
 const stopAlarm = () => {
-    getAlarm.pause();
-    getAlarm.currentTime = 0;
+    if (!getAlarm.paused) {
+        getAlarm.pause();
+        getAlarm.currentTime = 0;
+        enableButton(startButton);
+    }
 }
 const createTimer = (timer) => {
     if (!checkInput(timer)) {
@@ -178,16 +179,15 @@ const stopTime = () => {
     }
 }
 const resetTime = () => {
-    if (getAlarm.paused === false) {
+    if (!getAlarm.paused) {
         window.alert("Turn off your alarm first!");
         return;
-    } else {
-        clearInterval(clockIntervalId);
-        isRunning = false;
-        currentTime.copyTime(resettedTime);
-        mainTimer.textContent = currentTime;
-        enableButton(startButton, stopButton); 
     }
+    clearInterval(clockIntervalId);
+    isRunning = false;
+    currentTime.copyTime(resettedTime);
+    mainTimer.textContent = currentTime;
+    enableButton(startButton, stopButton);
 }
 clockInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
