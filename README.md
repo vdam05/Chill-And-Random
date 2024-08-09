@@ -1,7 +1,7 @@
 # Cool-App
-App built in HTML, CSS, JavaScript
-Consisted of multiple mini projects built in plain JS
-Has not yet considered building in React.
+App built in HTML, CSS, JavaScript </br>
+Consisted of multiple mini projects built in plain JS </br>
+Has not yet considered building in React. </br>
 
 # List includes (so far):
 

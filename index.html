@@ -26,7 +26,6 @@
 				</div>
 			</section>
 			<section class="music-screen">
-				
 			</section>
 			<section class="timer-screen">
 				<div id="clock">
@@ -35,6 +34,7 @@
 					<input id="clock-input" type="text" maxlength="8" required>
 				</div>
 				<div class="clock-buttons">
+					<button id="stop-alarm" onclick="stopAlarm()">Stop Alarm</button>
 					<button id="start-clock" onclick="startTime()">Start</button>
 					<button id="stop-clock" onclick="stopTime()">Stop</button>
 					<button id="reset-clock" onclick="resetTime()">Reset</button>
@@ -57,7 +57,9 @@
 				</div>
 				<p>Result:</p>
 				<div id="food-output">
-					<img id="food-output-picture">
+					<div id="food-output-picture-container">
+						<img id="food-output-picture">
+					</div>
 					<p id="food-output-legend"></p>
 				</div>
 				<button id="go-back-foods" onclick="goBack(foodScreen, goBackFood)">Back</button>

@@ -257,12 +257,19 @@ html {
     border: 1px solid yellow;
     border-radius: 40px;
 }
-#food-output-picture {
+#food-output-picture-container {
     height: 275px;
     width: 275px;
     border-radius: 40px;
     border: 1px dashed black;
+    margin: 20px 0;
+    overflow: hidden;
 }
+#food-output-picture {
+    height: 100%;
+    width: 100%;
+    border-radius: 40px;
+} 
 #food-output-legend {
     width: clamp(75px, 40%, 400px);
     font-size: 1.5rem;
