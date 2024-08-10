@@ -216,11 +216,7 @@ const getFoodDetails = (food) => {
 }
 //TBA async function
 async function fetchFood (word) {
-    const fetchedFood = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${word}`, {
-                            "headers": {
-
-                            }
-                        })
+    const fetchedFood = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${word}`)
                         .then((res) => res.json()).catch((error) => console.error(error));
     if (fetchedFood.meals === null) {
         foodLegend.textContent = "No food found";
